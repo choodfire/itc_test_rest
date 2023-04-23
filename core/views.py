@@ -1,6 +1,5 @@
-from django.shortcuts import render
 from rest_framework import viewsets
-from .models import *
+import core.filters
 from .serializers import *
 
 
@@ -21,4 +20,10 @@ class UniversityView(viewsets.ModelViewSet):
 
 class LecturerView(viewsets.ModelViewSet):
     serializer_class = LecturerSerializer
-    queryset = Lecturer.objects.all()
+    # queryset = Lecturer.objects.all()
+
+    def get_filters(self):
+        return core.filters.LecturerFilter(self.request.GET)
+
+    def get_queryset(self):
+        return self.get_filters().qs
