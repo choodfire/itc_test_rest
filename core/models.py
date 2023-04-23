@@ -21,6 +21,7 @@ class Address(models.Model):
 class University(models.Model):
     title = models.CharField(
         "Название",
+        max_length=255,
     )
     address = models.ForeignKey(
         Address,
@@ -43,6 +44,9 @@ class Department(models.Model):
         University,
         on_delete=models.CASCADE,
     )
+
+    def get_number(self):
+        return f'Количество: {self.employees_number}'
 
     def __str__(self):
         return self.title
@@ -70,4 +74,4 @@ class Lecturer(models.Model):
     )
 
     def __str__(self):
-        return f'{self.first_name}, {self.middle_name} {self.last_name}'
+        return f'{self.middle_name} {self.first_name} {self.last_name}'
