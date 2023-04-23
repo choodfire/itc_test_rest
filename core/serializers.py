@@ -9,7 +9,7 @@ class AddressSerializer(serializers.ModelSerializer):
 
 
 class UniversitySerializer(serializers.ModelSerializer):
-    address = AddressSerializer
+    address = AddressSerializer()
 
     class Meta:
         model = University
@@ -17,7 +17,8 @@ class UniversitySerializer(serializers.ModelSerializer):
 
 
 class DepartmentSerializer(serializers.ModelSerializer):
-    university = UniversitySerializer
+    university = UniversitySerializer()
+    employees_number = serializers.ReadOnlyField(source='get_number')
 
     class Meta:
         model = Department
@@ -25,7 +26,7 @@ class DepartmentSerializer(serializers.ModelSerializer):
 
 
 class LecturerSerializer(serializers.ModelSerializer):
-    department = DepartmentSerializer
+    department = DepartmentSerializer()
 
     class Meta:
         model = Lecturer
