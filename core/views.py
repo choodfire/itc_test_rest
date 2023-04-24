@@ -20,7 +20,6 @@ class UniversityView(viewsets.ModelViewSet):
 
 class LecturerView(viewsets.ModelViewSet):
     serializer_class = LecturerSerializer
-    # queryset = Lecturer.objects.all()
 
     def get_filters(self):
         return core.filters.LecturerFilter(self.request.GET)

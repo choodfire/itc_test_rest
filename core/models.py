@@ -23,9 +23,11 @@ class University(models.Model):
         "Название",
         max_length=255,
     )
-    address = models.ForeignKey(
+    address = models.OneToOneField(
         Address,
         on_delete=models.CASCADE,
+        verbose_name="Адрес",
+        related_name="university",
     )
 
     def __str__(self):
@@ -42,10 +44,12 @@ class Department(models.Model):
     )
     university = models.ForeignKey(
         University,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE, # verbose name, related_name
+        verbose_name="Университет",
+        related_name="departments",
     )
 
-    def get_number(self):
+    def get_count(self):
         return f'Количество: {self.employees_number}'
 
     def __str__(self):
@@ -55,7 +59,9 @@ class Department(models.Model):
 class Lecturer(models.Model):
     department = models.ForeignKey(
         Department,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,  # verbose name, related_name- ко всем связям
+        verbose_name="Кафедра",
+        related_name="lecturers"
     )
     first_name = models.CharField(
         "Имя",

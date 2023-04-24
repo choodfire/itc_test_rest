@@ -18,7 +18,7 @@ class UniversitySerializer(serializers.ModelSerializer):
 
 class DepartmentSerializer(serializers.ModelSerializer):
     university = UniversitySerializer()
-    employees_number = serializers.ReadOnlyField(source='get_number')
+    employees_number = serializers.ReadOnlyField(source='get_count')
 
     class Meta:
         model = Department
